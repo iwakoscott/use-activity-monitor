@@ -4,12 +4,13 @@ import { useActivityMonitor } from "./useActivityMonitor";
 
 const JWT = {
   username: "unminified",
-  amount: 20
+  amount: 20,
 };
 
 export default function App() {
   const [listen, setListen] = useState(true);
   const [session, setSession] = useState(JWT);
+  const [amount, setAmount] = useState(session ? session.amount : 0);
 
   useActivityMonitor(
     () => {
@@ -45,9 +46,9 @@ export default function App() {
     <div className="App">
       <h1>Bank of Satoshi</h1>
       <p>@{session.username}</p> <button onClick={logout}>Logout</button>
-      <p>Bitcoin: {session.amount}</p>
-      <button>Sell</button>
-      <button>Buy</button>
+      <p>Bitcoin: {amount}</p>
+      <button onClick={() => setAmount((prev) => prev - 1)}>Sell</button>
+      <button onClick={() => setAmount((prev) => prev + 1)}>Buy</button>
     </div>
   );
 }
