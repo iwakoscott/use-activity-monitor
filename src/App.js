@@ -1,5 +1,4 @@
-import React, { useState, useCallback } from "react";
-import { useActivityMonitor } from "./useActivityMonitor";
+import React, { useState } from "react";
 import "./styles.css";
 
 const JWT = {
@@ -7,26 +6,10 @@ const JWT = {
   amount: 20,
 };
 
-const options = {
-  events: ["click", "mousemove", "mousedown", "keypress"],
-  wait: 5000,
-};
-
 export default function App() {
   const [listen, setListen] = useState(true);
   const [session, setSession] = useState(JWT);
   const [amount, setAmount] = useState(session ? session.amount : 0);
-
-  const callback = useCallback(() => {
-    setListen(false);
-    if (window.confirm("Do you want to continue your session?")) {
-      setListen(true);
-    } else {
-      logout();
-    }
-  }, []);
-
-  useActivityMonitor(callback, listen, options);
 
   function setUser() {
     setSession(JWT);
