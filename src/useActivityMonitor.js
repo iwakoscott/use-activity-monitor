@@ -1,13 +1,6 @@
 import { useEffect } from "react";
 
-export const useActivityMonitor = (
-  callback,
-  {
-    when,
-    wait = 5000,
-    events = ["click", "mousemove", "mousedown", "keypress"]
-  } = {}
-) => {
+export const useActivityMonitor = (callback, when, { wait, events }) => {
   useEffect(() => {
     let timeout;
     function resetTimer() {
